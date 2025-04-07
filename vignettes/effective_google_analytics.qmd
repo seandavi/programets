@@ -1,0 +1,130 @@
+---
+title: "Using google analytics effectively"
+vignette: >
+  %\VignetteIndexEntry{Using google analytics effectively}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+toc: true
+---
+
+Here are some suggestions for GA4 metrics and dimensions for an open-source software project's website, along with useful ways to visualize them. The key is to align tracking with the primary goals of such a site: attracting users, facilitating downloads/usage, providing documentation, and fostering community/contributions.
+
+# Core Goals of an Open Source Project Website
+
+1.  **Increase Awareness & Adoption:** Get people to know about and use the software.
+2.  **Provide Support:** Offer clear documentation and help resources.
+3.  **Build Community:** Encourage interaction, contributions, and feedback.
+4.  **Showcase Project Health & Activity:** Demonstrate ongoing development and value.
+
+# Appropriate GA4 Metrics & Dimensions
+
+Here's a breakdown, categorized by goal:
+
+### Awareness & Adoption
+
+### Awareness & Adoption
+
+| Type | Name | Description |
+|------|------|-------------|
+| **Metrics** | Users | Total unique users visiting the site. |
+|  | New Users | Users visiting for the first time. Tracks growth. |
+|  | Sessions | Total number of visits. |
+|  | Event Count (for `download` event) | *Crucial*. You'll need to set up a custom event to track clicks on download links/buttons. |
+|  | Conversions (based on `download` event) | Mark the `download` event as a conversion for easy tracking. |
+|  | Views | Total page/screen views. |
+| **Dimensions** | Session Source / Medium | How users arrived (e.g., google / organic, github.com / referral, direct / none). Essential for understanding acquisition channels. |
+|  | First User Source / Medium | The channel that first brought the user to the site. Good for understanding initial discovery. |
+|  | Landing Page + query string | The first page a user saw in their session. Helps identify popular entry points. |
+|  | Country / City | Geographic location of users. |
+|  | Device Category | Desktop, mobile, tablet usage. |
+
+## Providing Support (Documentation)
+
+* **Metrics:**
+    * **Views (filtered by documentation pages):** How often are specific documentation sections viewed?
+    * **Average Engagement Time per Session/Page (filtered):** Are users spending time reading the docs, or quickly leaving?
+    * **Event Count (for `view_search_results`):** If using the site's search for docs, how often is it used? (Enhanced Measurement)
+    * **Scrolls (filtered by documentation pages):** Are users scrolling down long documentation pages? (Enhanced Measurement)
+* **Dimensions:**
+    * **Page Path and Screen Class:** The specific documentation pages being viewed.
+    * **Search Term:** What are users searching for on your site? (Requires setup)
+    * **Session Source / Medium:** Do users arriving from specific channels engage more with docs?
+
+## Building Community & Contributions
+
+* **Metrics:**
+    * **Event Count (for `outbound_click` or custom events):** Track clicks leading to:
+        * Code Repositories (GitHub, GitLab, etc.) - *Custom Event like `view_repository` recommended.*
+        * Issue Trackers - *Custom Event like `view_issues` recommended.*
+        * Community Forums/Chat (Discourse, Slack, Discord) - *Custom Event like `join_community` recommended.*
+        * Contribution Guides - *Can be tracked via Views, or a custom event `view_contribution_guide`.*
+    * **Conversions (based on the above custom events):** Mark key community link clicks as conversions.
+* **Dimensions:**
+    * **Page Path and Screen Class:** Which pages are driving clicks to community resources? (e.g., the "Contribute" page).
+    * **Outbound Link URL:** The specific external URL clicked (useful if not using custom events, though less precise).
+    * **Session Source / Medium:** Are certain channels bringing in more potential contributors?
+
+## Showcasing Project Health & Activity
+
+* **Metrics:**
+    * **Views (filtered by Blog/News/Release Notes):** How often are updates being read?
+    * **Average Engagement Time per Session/Page (filtered):** Are users reading the content?
+    * **Users / New Users:** Overall site growth indicates project interest.
+* **Dimensions:**
+    * **Page Path and Screen Class:** Which specific blog posts or release notes are most popular?
+    * **Session Source / Medium:** How are people finding out about updates?
+
+## General Engagement & Technical
+
+* **Metrics:**
+    * **Engagement Rate:** Percentage of sessions that lasted longer than 10 seconds, had a conversion event, or had 2+ page views. Indicates quality visits.
+    * **Average Engagement Time per Session:** Overall time users are actively engaged.
+* **Dimensions:**
+    * **Browser:** Technical dimension for compatibility checks.
+    * **Operating System:** Technical dimension.
+    * **Language:** User's browser language.
+
+# Important Considerations
+
+* **Custom Events are Key:** GA4's automatic tracking is good, but you *must* set up custom events (e.g., via Google Tag Manager) to track crucial actions like downloads, clicks to GitHub/issue tracker, etc.
+* **Mark Conversions:** Identify the most important events (like `download`, `view_repository`) and mark them as conversions in the GA4 interface. This makes reporting on key goals much easier.
+* **Filters & Segments:** Use GA4's "Explore" section heavily. Create reports filtered by specific page paths (e.g., `/docs/`, `/blog/`) or user segments (e.g., users from specific countries, users who downloaded the software).
+
+
+# Good Plots and Tables for Summarization
+
+1.  **Acquisition Overview Dashboard:**
+    * **Table:** Sessions, Users, New Users, Engagement Rate, Conversions (Downloads) by `Session Source / Medium`. (Shows effectiveness of channels).
+    * **Time Series Chart:** Users and New Users over time (daily/weekly). (Shows growth trends).
+    * **Pie Chart:** New vs. Returning Users. (Shows audience composition).
+    * **Geo Map:** Users by `Country`. (Shows geographic reach).
+
+2.  **Content & Engagement Report:**
+    * **Table:** Top Pages (`Page Path and Screen Class`) by Views, Users, Average Engagement Time, Scrolls, Event Count (`download` or other key actions initiated from that page). (Shows popular/effective content).
+    * **Table:** Top Landing Pages (`Landing Page + query string`) by Sessions, Engagement Rate, Conversions (Downloads). (Shows effective entry points).
+    * **Table (Filtered for Blog/News):** Pages by Views, Average Engagement Time. (Shows blog performance).
+
+3.  **Download Performance Report:**
+    * **Time Series Chart:** `download` Event Count over time. (Shows download trends).
+    * **Table:** `download` Event Count (or Conversions) by `Session Source / Medium`. (Shows which channels drive downloads).
+    * **Table:** `download` Event Count (or Conversions) by `Landing Page + query string`. (Shows which entry pages lead to downloads).
+    * **Table:** `download` Event Count (or Conversions) by `Country`.
+
+4.  **Documentation Usage Report:**
+    * **Table (Filtered for /docs/ path):** Top Documentation Pages by Views, Average Engagement Time, Scrolls. (Shows most used/engaging docs).
+    * **Table:** `Search Term` by Usage Count. (Shows what users are looking for).
+
+5.  **Community & Contribution Funnel:**
+    * **Table:** Event Count for `view_repository`, `view_issues`, `join_community` etc. by `Session Source / Medium`. (Shows channels driving community engagement).
+    * **Table:** Event Count for these custom events by `Page Path` (Shows which pages drive these actions, e.g., "Contribute" page effectiveness).
+    * *(Advanced)*: A Funnel Exploration report showing users moving from viewing a contribution page -> clicking the repository link.
+
+6.  **Technology Overview:**
+    * **Pie Chart:** Users by `Device Category`.
+    * **Table:** Users by `Browser` and `Operating System`. (Useful for identifying potential compatibility issues if specific tech groups have low engagement).
+
+Remember to tailor these suggestions to the *specific* structure and goals of your open-source project's website. Regularly review the data to understand what's working and where users might be encountering friction.

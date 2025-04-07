@@ -1,0 +1,117 @@
+---
+title: "Google Analytics"
+vignette: >
+  %\VignetteIndexEntry{Google Analytics}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+
+# What is Google Analytics?
+Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. It is currently a platform in the Google Marketing Platform brand.
+Google Analytics is the most widely used web analytics service on the web. It is a powerful tool that provides insights into how users interact with your website, allowing you to make data-driven decisions to improve user experience and optimize your marketing efforts.
+Google Analytics 4 (GA4) is the latest version of Google Analytics, which focuses on event-based tracking and provides more advanced features for analyzing user behavior across different platforms.
+
+# The `googleAnalyticsR` package
+The `googleAnalyticsR` package is an R client for the Google Analytics API. It allows you to access and analyze your Google Analytics data directly from R, making it easier to integrate web analytics into your data analysis workflow. 
+The package provides functions to authenticate with your Google account, retrieve data from Google Analytics, and perform various analyses on the data.
+
+
+
+```{r}
+#| label: setup
+# library(programets)
+```
+
+
+# Getting started with `googleAnalyticsR`
+
+
+```{r}
+## setup
+library(googleAnalyticsR)
+
+## authenticate
+ga_auth(email = "seandavi@gmail.com")
+
+## get your accounts
+account_list <- ga_account_list("ga4")
+
+## account_list will have a column called "viewId"
+account_list$viewId
+
+## View account_list and pick the viewId you want to extract data from
+ga_id <- 347971380
+
+```
+
+The resulting `res` object will contain the data for the specified date range, metrics, and dimensions. You can view the first few rows of the data using the `head()` function. 
+
+
+
+
+```{r}
+library(googleAnalyticsR)
+library(lubridate)
+
+start_date <- Sys.Date() - 365
+end_date <- Sys.Date() - 1
+
+cat("Fetching daily data by New/Returning and Country...\n")
+
+tryCatch(
+    {
+        daily_user_country_data <- ga_data(
+            propertyId = ga_id,
+            dimensions = c("date", "newVsReturning", "country"), # Added dimensions
+            metrics = c("activeUsers", "sessions"), # Example metrics
+            date_range = c(start_date, end_date),
+            limit = -1
+        )
+
+        cat("Successfully fetched", nrow(daily_user_country_data), "rows.\n")
+        print(head(daily_user_country_data))
+    },
+    error = function(e) {
+        cat("Error fetching data:\n")
+        print(e)
+    }
+)
+```
+
+```{r}
+#| label: moving-average
+
+library(ggplot2)
+library(zoo)
+library(dplyr)
+
+# Group by user type and country, then calculate rolling average
+moving_avg_data <- daily_user_country_data %>%
+    arrange(date) %>%
+    group_by(newVsReturning, country) %>%
+    mutate(
+        activeUsers_7day_avg = rollmean(activeUsers, k = 7, fill = NA, align = "right"),
+        sessions_7day_avg = rollmean(sessions, k = 7, fill = NA, align = "right")
+    ) %>%
+    ungroup()
+
+# Let's see the results
+head(moving_avg_data)
+
+# Plot the moving average for active users
+moving_avg_data %>%
+    group_by(date, newVsReturning) %>%
+    summarise(activeUsers_7day_avg = sum(activeUsers_7day_avg, na.rm = TRUE)) %>%
+    ggplot(aes(x = date, y = activeUsers_7day_avg, color = newVsReturning)) +
+    geom_line() +
+    labs(
+        title = "7-Day Moving Average of Active Users",
+        x = "Date",
+        y = "Active Users (7-day avg)"
+    ) +
+    theme_minimal()
+```
