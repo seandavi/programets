@@ -87,8 +87,8 @@
 <span></span>
 <span><span class="co">## authenticate</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/googleAnalyticsR/man/ga_auth.html" class="external-link">ga_auth</a></span><span class="op">(</span>email <span class="op">=</span> <span class="st">"seandavi@gmail.com"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ 2025-04-07 18:55:00.343781 &gt; Default Google Project for googleAnalyticsR is set.        This is shared with all googleAnalyticsR users. If making a lot of API calls, please visit:        https://code.markedmondson.me/googleAnalyticsR/articles/setup.html#professional-mode-your-own-google-project       for instructions on setting your own Google Project</span></span>
-<span><span class="co">#&gt; ℹ 2025-04-07 18:55:00.353555 &gt; Setting client.id from options(googleAuthR.client_id)</span></span>
+<span><span class="co">#&gt; ℹ 2025-04-08 08:49:11.893342 &gt; Default Google Project for googleAnalyticsR is set.        This is shared with all googleAnalyticsR users. If making a lot of API calls, please visit:        https://code.markedmondson.me/googleAnalyticsR/articles/setup.html#professional-mode-your-own-google-project       for instructions on setting your own Google Project</span></span>
+<span><span class="co">#&gt; ℹ 2025-04-08 08:49:11.903126 &gt; Setting client.id from options(googleAuthR.client_id)</span></span>
 <span></span>
 <span><span class="co">## get your accounts</span></span>
 <span><span class="va">account_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/googleAnalyticsR/man/ga_account_list.html" class="external-link">ga_account_list</a></span><span class="op">(</span><span class="st">"ga4"</span><span class="op">)</span></span>
@@ -136,8 +136,8 @@
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ 2025-04-07 18:55:00.977227 &gt; Downloaded [ 408 ] of total [ 408 ] rows</span></span>
-<span><span class="co">#&gt; Successfully fetched 408 rows.</span></span>
+<span><span class="co">#&gt; ℹ 2025-04-08 08:49:13.773646 &gt; Downloaded [ 407 ] of total [ 407 ] rows</span></span>
+<span><span class="co">#&gt; Successfully fetched 407 rows.</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
 <span><span class="co">#&gt;   date       newVsReturning country       activeUsers sessions</span></span>
 <span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;          &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;</span></span>
@@ -182,12 +182,12 @@
 <span><span class="co">#&gt; # A tibble: 6 × 7</span></span>
 <span><span class="co">#&gt;   date       newVsReturning country    activeUsers sessions activeUsers_7day_avg</span></span>
 <span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;          &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;                &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2024-04-07 new            United St…           2        2                   NA</span></span>
-<span><span class="co">#&gt; 2 2024-04-07 (not set)      United St…           0        2                   NA</span></span>
-<span><span class="co">#&gt; 3 2024-04-08 new            United St…           1        1                   NA</span></span>
-<span><span class="co">#&gt; 4 2024-04-09 new            United St…           3        3                   NA</span></span>
-<span><span class="co">#&gt; 5 2024-04-09 (not set)      United St…           0        2                   NA</span></span>
-<span><span class="co">#&gt; 6 2024-04-10 new            United St…           6        6                   NA</span></span>
+<span><span class="co">#&gt; 1 2024-04-08 new            United St…           1        1                   NA</span></span>
+<span><span class="co">#&gt; 2 2024-04-09 new            United St…           3        3                   NA</span></span>
+<span><span class="co">#&gt; 3 2024-04-09 (not set)      United St…           0        2                   NA</span></span>
+<span><span class="co">#&gt; 4 2024-04-10 new            United St…           6        6                   NA</span></span>
+<span><span class="co">#&gt; 5 2024-04-10 returning      United St…           3        5                   NA</span></span>
+<span><span class="co">#&gt; 6 2024-04-10 (not set)      United St…           0        1                   NA</span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: sessions_7day_avg &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Plot the moving average for active users</span></span>
