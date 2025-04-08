@@ -1,3 +1,4 @@
 inst/doc
 **/.quarto/
 docs
+.vscode/
