@@ -26,8 +26,6 @@ Here's a breakdown, categorized by goal:
 
 ### Awareness & Adoption
 
-### Awareness & Adoption
-
 | Type | Name | Description |
 |------|------|-------------|
 | **Metrics** | Users | Total unique users visiting the site. |
@@ -127,4 +125,26 @@ Here's a breakdown, categorized by goal:
     * **Pie Chart:** Users by `Device Category`.
     * **Table:** Users by `Browser` and `Operating System`. (Useful for identifying potential compatibility issues if specific tech groups have low engagement).
 
-Remember to tailor these suggestions to the *specific* structure and goals of your open-source project's website. Regularly review the data to understand what's working and where users might be encountering friction.
+
+# Available google analytics metrics and dimensions
+
+```{r}
+#| label: ga4-metrics
+#| echo: false
+#| message: false
+#| column: "page"
+googleAnalyticsR::ga_auth(email = "seandavi@gmail.com")
+metrics_metadata <- googleAnalyticsR::ga_meta()
+metrics_metadata |>
+    dplyr::filter(
+        status != "DEPRECATED",
+    ) |>
+    dplyr::select(
+        name,
+        type,
+        dataType,
+        group,
+        description
+    ) |>
+    DT::datatable(options = list(filter = "top", pageLength = 25), rownames = FALSE, width = "100%")
+```

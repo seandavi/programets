@@ -10,11 +10,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports:
     googleAnalyticsR,
-    ggplot2,
     dplyr,
-    zoo,
-    lubridate,
+    rlang
 Suggests: 
     knitr,
-    quarto
+    quarto,
+    lubridate,
+    zoo,
+    ggplot2,
+    DT,
+    shiny
 VignetteBuilder: quarto
