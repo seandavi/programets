@@ -26,7 +26,7 @@ ga_meta_simple <- function() {
       rlang::.data$description
     )
 
-  return(ga_metadata)
+  ga_metadata
 }
 
 #' Launch Google Analytics metadata browser Shiny app
@@ -157,5 +157,5 @@ ga_metrics_and_dimensions_browser <- function(...) {
 #' @export
 ga_query_explorer <- function() {
   # Open the Google Analytics API Explorer in a web browser
-  browseURL("https://ga-dev-tools.google/ga4/query-explorer/")
+  utils::browseURL("https://ga-dev-tools.google/ga4/query-explorer/")
 }
