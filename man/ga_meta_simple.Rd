@@ -16,7 +16,7 @@ ga_meta_simple()
 }
 \seealso{
 Other Google Analytics: 
-\code{\link{ga_metrics_and_dimensions_browser}()},
+\code{\link{ga_metrics_and_dims_browser}()},
 \code{\link{ga_query_explorer}()}
 }
 \concept{Google Analytics}

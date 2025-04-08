@@ -46,7 +46,7 @@ ga_meta_simple <- function() {
 #' }
 #'
 #' @export
-ga_metrics_and_dimensions_browser <- function(...) {
+ga_metrics_and_dims_browser <- function(...) {
   # Check if required packages are installed
   if (!requireNamespace("shiny", quietly = TRUE) ||
     !requireNamespace("DT", quietly = TRUE)) {

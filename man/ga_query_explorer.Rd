@@ -31,6 +31,6 @@ ga_query_explorer()
 \seealso{
 Other Google Analytics: 
 \code{\link{ga_meta_simple}()},
-\code{\link{ga_metrics_and_dimensions_browser}()}
+\code{\link{ga_metrics_and_dims_browser}()}
 }
 \concept{Google Analytics}
