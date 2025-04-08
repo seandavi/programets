@@ -19,3 +19,9 @@ ga_metrics_and_dimensions_browser()
 }
 
 }
+\seealso{
+Other Google Analytics: 
+\code{\link{ga_meta_simple}()},
+\code{\link{ga_query_explorer}()}
+}
+\concept{Google Analytics}

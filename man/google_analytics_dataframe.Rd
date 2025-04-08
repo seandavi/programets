@@ -25,7 +25,8 @@ google_analytics_dataframe(
 
 \item{dimensions}{The dimensions to retrieve (e.g., "ga:date,ga:source").}
 
-\item{filters}{Optional filters to apply to the data (e.g., "ga:country==United States").}
+\item{filters}{Optional filters to apply to the
+data (e.g., "ga:country==United States").}
 
 \item{sort}{Optional sorting for the data (e.g., "-ga:sessions").}
 }

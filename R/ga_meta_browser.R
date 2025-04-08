@@ -48,7 +48,7 @@ ga_metrics_and_dimensions_browser <- function(...) {
   # Check if required packages are installed
   if (!requireNamespace("shiny", quietly = TRUE) ||
     !requireNamespace("DT", quietly = TRUE)) {
-    stop("Packages 'shiny' and 'DT' are required for this function. Please install them.")
+    stop("Please install the required 'shiny' and 'DT' packages.")
   }
 
   # Get the metadata using the existing function
@@ -56,7 +56,7 @@ ga_metrics_and_dimensions_browser <- function(...) {
 
   # Define unique values for filters
   types <- sort(unique(ga_metadata$type))
-  dataTypes <- sort(unique(ga_metadata$dataType))
+  data_types <- sort(unique(ga_metadata$dataType))
   groups <- sort(unique(ga_metadata$group))
 
   # Define UI
@@ -69,7 +69,7 @@ ga_metrics_and_dimensions_browser <- function(...) {
           choices = c("All", types), selected = "All"
         ),
         shiny::selectInput("dataType", "Filter by Data Type:",
-          choices = c("All", dataTypes), selected = "All"
+          choices = c("All", data_types), selected = "All"
         ),
         shiny::selectInput("group", "Filter by Group:",
           choices = c("All", groups), selected = "All"
