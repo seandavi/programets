@@ -5,6 +5,8 @@
 #'
 #' @family Google Analytics
 #'
+#' @importFrom rlang .data
+#'
 #' @examples
 #' ga_meta_simple()
 #'
@@ -16,14 +18,14 @@ ga_meta_simple <- function() {
   # Retrieve the metadata
   ga_metadata <- googleAnalyticsR::ga_meta() |>
     dplyr::filter(
-      rlang::.data$status != "DEPRECATED",
+      .data$status != "DEPRECATED",
     ) |>
     dplyr::select(
-      rlang::.data$name,
-      rlang::.data$type,
-      rlang::.data$dataType,
-      rlang::.data$group,
-      rlang::.data$description
+      .data$name,
+      .data$type,
+      .data$dataType,
+      .data$group,
+      .data$description
     )
 
   ga_metadata
