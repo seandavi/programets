@@ -29,5 +29,6 @@ Suggests:
     ggplot2,
     DT,
     shiny,
-    testthat
+    testthat,
+    zoo
 VignetteBuilder: quarto
