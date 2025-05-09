@@ -12,7 +12,9 @@ Imports:
     googleAnalyticsR,
     dplyr,
     rlang,
-    utils
+    utils,
+    httr2,
+    jsonlite
 Suggests: 
     knitr,
     quarto,
