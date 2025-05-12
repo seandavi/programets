@@ -7,7 +7,8 @@
 #'
 #' @importFrom dplyr arrange bind_rows mutate tibble
 #' @importFrom purrr map_dfr
-#' @importFrom httr2 req_body_json req_headers req_method req_perform resp_body_json
+#' @importFrom httr2 req_body_json req_headers req_method req_perform resp_body_json request
+#' @importFrom rlang .data
 #' 
 #' @return A tibble with the following columns:
 #' \describe{
@@ -57,7 +58,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
         pubmed_url = NA_character_
       )
     ) |>
-    arrange(core_project_number)
+    arrange(.data$core_project_number)
 
   return(all_results)
 }
