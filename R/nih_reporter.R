@@ -21,6 +21,14 @@
 #' 
 #' @export
 get_publications_for_core_projects <- function(core_project_numbers) {
+  # Validate input
+  if (!is.character(core_project_numbers)) {
+    stop("Input must be a character vector")
+  }
+  
+  # Convert input to uppercase
+  core_project_numbers <- toupper(core_project_numbers)
+
   req <- request("https://api.reporter.nih.gov/v2/publications/search") |>
     req_method("POST") |>
     req_headers("Content-Type" = "application/json") |>
@@ -36,7 +44,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
   # Parse returned publications to a tibble
   results_tbl <- 
     purrr::map_dfr(resp$results, function(pub) {
-      tibble(
+      dplyr::tibble(
         core_project_number = pub$coreproject,
         found = TRUE,
         applid = as.character(pub$applid),
@@ -62,3 +70,4 @@ get_publications_for_core_projects <- function(core_project_numbers) {
 
   return(all_results)
 }
+
