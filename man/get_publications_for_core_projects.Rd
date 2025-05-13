@@ -23,3 +23,9 @@ A tibble with the following columns:
 This function retrieves a list of publications associated with a set of core
 project numbers from the NIH RePORTER API.
 }
+\examples{
+# Get publications for a set of core project numbers
+publications <- get_publications_for_core_projects(c("u54od036472", "99999999"))
+# View the results
+publications
+}

@@ -20,12 +20,17 @@
 #' }
 #' 
 #' @export
+#' @examples
+#' # Get publications for a set of core project numbers
+#' publications <- get_publications_for_core_projects(c("u54od036472", "99999999"))
+#' # View the results
+#' publications
 get_publications_for_core_projects <- function(core_project_numbers) {
   # Validate input
   if (!is.character(core_project_numbers)) {
     stop("Input must be a character vector")
   }
-  
+
   # Convert input to uppercase
   core_project_numbers <- toupper(core_project_numbers)
 
@@ -67,7 +72,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
       )
     ) |>
     arrange(.data$core_project_number)
-
   return(all_results)
 }
+
 
