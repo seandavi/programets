@@ -22,5 +22,7 @@ Suggests:
     zoo,
     ggplot2,
     DT,
-    shiny
+    shiny,
+    testthat (>= 3.0.0)
 VignetteBuilder: quarto
+Config/testthat/edition: 3
