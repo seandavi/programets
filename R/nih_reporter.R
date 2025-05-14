@@ -8,7 +8,8 @@
 #' @importFrom dplyr arrange bind_rows mutate tibble
 #' @importFrom purrr map_dfr
 #' @importFrom httr2 req_body_json req_headers req_method req_perform resp_body_json request
-#' @importFrom rlang .data
+#' @importFrom rlang .data abort inform format_error_bullets
+#' @importFrom stringr regex str_detect
 #' 
 #' @return A tibble with the following columns:
 #' \describe{
@@ -34,6 +35,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
   # Convert input to uppercase
   core_project_numbers <- toupper(core_project_numbers)
 
+  # Construct httr2 req
   req <- request("https://api.reporter.nih.gov/v2/publications/search") |>
     req_method("POST") |>
     req_headers("Content-Type" = "application/json") |>
@@ -42,9 +44,22 @@ get_publications_for_core_projects <- function(core_project_numbers) {
       include_fields = list( "applid", "coreproject", "pmid")
     )) 
   
-  resp <- req |>
-    req_perform() |>
-    resp_body_json()
+  # Attempt to perform req, with error handling
+  resp <- tryCatch(
+    {
+      req |> 
+        req_perform() |> 
+        resp_body_json()
+    },
+    error = function(e){
+      if(str_detect(as.character(e), pattern = regex('HTTP 400', ignore_case = T)) ) {
+        inform(format_error_bullets(c('!' = conditionMessage(e))))
+        abort('Please verify at least one of the core projects has been entered correctly and exists.', class = 'api_400')
+      } else {
+        abort(conditionMessage(e), class = 'api_general')
+      }
+    }
+  )
 
   # Parse returned publications to a tibble
   results_tbl <- 
