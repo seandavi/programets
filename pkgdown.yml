@@ -1,7 +1,6 @@
-pandoc: '3.5'
-pkgdown: 2.1.1.9000
-pkgdown_sha: 66477c0dbb4f4925ec872cf64d5eaa316cc70bac
+pandoc: 3.6.4
+pkgdown: 2.1.1
+pkgdown_sha: ~
 articles:
   effective_google_analytics: effective_google_analytics.html
-  googleanalytics: googleanalytics.html
-last_built: 2025-04-08T12:49Z
+last_built: 2025-05-14T15:01Z
