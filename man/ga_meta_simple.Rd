@@ -25,9 +25,11 @@ This function requires first authenticating to
 Google Analytics using the \code{ga_auth()} function.
 }
 \examples{
+\dontrun{
 res = ga_meta_simple()
 head(res)
 dplyr::glimpse(res)
+}
 
 }
 \seealso{

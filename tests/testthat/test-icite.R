@@ -1,5 +1,3 @@
-context("icite")
-
 test_that("icite returns expected tibble for valid PMIDs", {
   pmids <- c(26001965, 25015380)
   icite_records <- icite(pmids)

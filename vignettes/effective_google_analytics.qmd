@@ -124,27 +124,3 @@ Here's a breakdown, categorized by goal:
 6.  **Technology Overview:**
     * **Pie Chart:** Users by `Device Category`.
     * **Table:** Users by `Browser` and `Operating System`. (Useful for identifying potential compatibility issues if specific tech groups have low engagement).
-
-
-# Available google analytics metrics and dimensions
-
-```{r}
-#| label: ga4-metrics
-#| echo: false
-#| message: false
-#| column: "page"
-googleAnalyticsR::ga_auth(email = "seandavi@gmail.com")
-metrics_metadata <- googleAnalyticsR::ga_meta()
-metrics_metadata |>
-    dplyr::filter(
-        status != "DEPRECATED",
-    ) |>
-    dplyr::select(
-        name,
-        type,
-        dataType,
-        group,
-        description
-    ) |>
-    DT::datatable(options = list(filter = "top", pageLength = 25), rownames = FALSE, width = "100%")
-```

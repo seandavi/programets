@@ -15,9 +15,11 @@
 #' @family Google Analytics
 #'
 #' @examples
+#' \dontrun{
 #' res = ga_meta_simple()
 #' head(res)
 #' dplyr::glimpse(res)
+#' }
 #'
 #' @return A tibble containing Google Analytics metadata.
 #'
