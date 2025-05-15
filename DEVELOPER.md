@@ -1,8 +1,20 @@
 # Developer notes
 
-## Handling google authentication
+## Development setup
 
-We follow the documentation at https://gargle.r-lib.org/articles/managing-tokens-securely.html to encrypt the google service account json file. 
+Add the following to your `.Renviron` file:
+
+```
+GARGLE_ENCRYPTION_KEY = "your_key_here"
+```
+This will set the `GARGLE_ENCRYPTION_KEY` environment variable, which is used to encrypt and decrypt the google service account json file.
+
+
+## Encrypting the google service account json file
+
+This section just describes how we set up the service account file and encryption. We need do this only once. The google service account json file contains sensitive information, such as the private key, which should not be stored in the repository. To protect this information, we encrypt the json file using the `gargle` package.
+
+We follow the documentation at https://gargle.r-lib.org/articles/managing-tokens-securely.html to encrypt the google service account json file.
 
 Step 1: Create a key for encryption
 
