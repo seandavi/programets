@@ -1,138 +1,29 @@
-#' Google analytics metadata browser
+#' Google analytics metadata dataframe
 #'
 #' This function retrieves Google Analytics metadata
-#' and returns it as a dataframe.
+#' and returns it as a dataframe. The metadata includes
+#' information about metrics, dimensions, and other
+#' attributes available in Google Analytics.
 #'
-#' @family Google Analytics
+#' This function is a wrapper around the
+#' `googleAnalyticsR::ga_meta()` function. It retrieves
+#' metadata for the Google Analytics API version 4.
 #'
-#' @importFrom rlang .data
-#'
-#' @examples
-#' ga_meta_simple()
-#'
-#' @export
-ga_meta_simple <- function() {
-  # Authenticate with Google Analytics
-  googleAnalyticsR::ga_auth()
-
-  # Retrieve the metadata
-  ga_metadata <- googleAnalyticsR::ga_meta() |>
-    dplyr::filter(
-      .data$status != "DEPRECATED",
-    ) |>
-    dplyr::select(
-      .data$name,
-      .data$type,
-      .data$dataType,
-      .data$group,
-      .data$description
-    )
-
-  ga_metadata
-}
-
-#' Launch Google Analytics metadata browser Shiny app
-#'
-#' This function creates a Shiny app that allows users to search and filter
-#' Google Analytics metadata interactively.
-#'
-#' @param ... Additional parameters passed to shiny::runApp()
+#' @note This function requires first authenticating to 
+#' Google Analytics using the `ga_auth()` function.
 #'
 #' @family Google Analytics
 #'
 #' @examples
 #' \dontrun{
-#' ga_metrics_and_dimensions_browser()
+#' ga_meta_simple()
 #' }
+#' 
+#' @return A tibble containing Google Analytics metadata.
 #'
 #' @export
-ga_metrics_and_dims_browser <- function(...) {
-  # Check if required packages are installed
-  if (!requireNamespace("shiny", quietly = TRUE) ||
-    !requireNamespace("DT", quietly = TRUE)) {
-    stop("Please install the required 'shiny' and 'DT' packages.")
-  }
-
-  # Get the metadata using the existing function
-  ga_metadata <- ga_meta_simple()
-
-  # Define unique values for filters
-  types <- sort(unique(ga_metadata$type))
-  data_types <- sort(unique(ga_metadata$dataType))
-  groups <- sort(unique(ga_metadata$group))
-
-  # Define UI
-  ui <- shiny::fluidPage(
-    shiny::titlePanel("Google Analytics Metadata Browser"),
-    shiny::sidebarLayout(
-      shiny::sidebarPanel(
-        shiny::textInput("search", "Search (name/description):", ""),
-        shiny::selectInput("type", "Filter by Type:",
-          choices = c("All", types), selected = "All"
-        ),
-        shiny::selectInput("dataType", "Filter by Data Type:",
-          choices = c("All", data_types), selected = "All"
-        ),
-        shiny::selectInput("group", "Filter by Group:",
-          choices = c("All", groups), selected = "All"
-        ),
-        shiny::hr(),
-        shiny::helpText("This app allows you to browse and filter Google Analytics metadata.")
-      ),
-      shiny::mainPanel(
-        DT::DTOutput("metadata_table")
-      )
-    )
-  )
-
-  # Define server logic
-  server <- function(input, output, session) {
-    # Filtered data based on inputs
-    filtered_data <- shiny::reactive({
-      data <- ga_metadata
-
-      # Search filter (case insensitive)
-      if (input$search != "") {
-        search_pattern <- tolower(input$search)
-        data <- data[grepl(search_pattern, tolower(data$name)) |
-          grepl(search_pattern, tolower(data$description)), ]
-      }
-
-      # Type filter
-      if (input$type != "All") {
-        data <- data[data$type == input$type, ]
-      }
-
-      # Data Type filter
-      if (input$dataType != "All") {
-        data <- data[data$dataType == input$dataType, ]
-      }
-
-      # Group filter
-      if (input$group != "All") {
-        data <- data[data$group == input$group, ]
-      }
-
-      return(data)
-    })
-
-    # Render the table
-    output$metadata_table <- DT::renderDT({
-      DT::datatable(
-        filtered_data(),
-        options = list(
-          pageLength = 15,
-          searchHighlight = TRUE,
-          searchDelay = 100
-        ),
-        filter = "top",
-        rownames = FALSE
-      )
-    })
-  }
-
-  # Return the Shiny app
-  shiny::shinyApp(ui, server, ...)
+ga_meta_simple <- function() {
+  tibble::as_tibble(googleAnalyticsR::ga_meta(version = "data"))
 }
 
 #' Browse google analytics query explorer

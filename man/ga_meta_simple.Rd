@@ -2,21 +2,36 @@
 % Please edit documentation in R/ga_meta_browser.R
 \name{ga_meta_simple}
 \alias{ga_meta_simple}
-\title{Google analytics metadata browser}
+\title{Google analytics metadata dataframe}
 \usage{
 ga_meta_simple()
 }
+\value{
+A tibble containing Google Analytics metadata.
+}
 \description{
 This function retrieves Google Analytics metadata
-and returns it as a dataframe.
+and returns it as a dataframe. The metadata includes
+information about metrics, dimensions, and other
+attributes available in Google Analytics.
+}
+\details{
+This function is a wrapper around the
+\code{googleAnalyticsR::ga_meta()} function. It retrieves
+metadata for the Google Analytics API version 4.
+}
+\note{
+This function requires first authenticating to
+Google Analytics using the \code{ga_auth()} function.
 }
 \examples{
+\dontrun{
 ga_meta_simple()
+}
 
 }
 \seealso{
 Other Google Analytics: 
-\code{\link{ga_metrics_and_dims_browser}()},
 \code{\link{ga_query_explorer}()}
 }
 \concept{Google Analytics}
