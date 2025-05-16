@@ -1,6 +1,6 @@
 Package: programets
 Title: Collect and analyze academic impact metrics from various sources
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     c(person("Sean", "Davis", , "seandavi@gmail.com", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-8991-6458")),
     person("David", "Mayer", , "david.mayer@cuanschutz.edu", role = c("aut")))
