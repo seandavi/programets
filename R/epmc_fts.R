@@ -147,8 +147,8 @@ epmc_search <- function(query, page_limit = 10) {
     }
     cursor_mark <- resp_json$nextCursorMark
 
-    # Optional: Add a small delay to be polite to the API
-    # Sys.sleep(0.1) 
+    # Add a small delay to be polite to the API
+    Sys.sleep(delay)
   }
 
   if (length(all_results) == 0) {
