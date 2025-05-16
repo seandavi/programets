@@ -1,15 +1,18 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>/404.html</loc></url>
+<url><loc>/DEVELOPER.html</loc></url>
 <url><loc>/LICENSE-text.html</loc></url>
 <url><loc>/LICENSE.html</loc></url>
 <url><loc>/articles/effective_google_analytics.html</loc></url>
+<url><loc>/articles/googleanalytics.html</loc></url>
 <url><loc>/articles/index.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/reference/epmc_search.html</loc></url>
+<url><loc>/reference/ga_dataframe.html</loc></url>
 <url><loc>/reference/ga_meta_simple.html</loc></url>
-<url><loc>/reference/ga_metrics_and_dims_browser.html</loc></url>
 <url><loc>/reference/ga_query_explorer.html</loc></url>
-<url><loc>/reference/google_analytics_dataframe.html</loc></url>
+<url><loc>/reference/get_publications_for_core_projects.html</loc></url>
 <url><loc>/reference/icite.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 </urlset>
