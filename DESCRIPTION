@@ -1,9 +1,15 @@
 Package: programets
 Title: Collect and analyze academic impact metrics from various sources
-Version: 0.0.0.9000
+Version: 0.2.0
 Authors@R: 
-    person("Sean", "Davis", , "seandavi@gmail.com", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-8991-6458"))
-Description: What the package does (one paragraph).
+    c(person("Sean", "Davis", , "seandavi@gmail.com", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-8991-6458")),
+    person("David", "Mayer", , "david.mayer@cuanschutz.edu", role = c("aut")))
+Description: 
+    Collect and analyze academic impact metrics from various sources. 
+    The package provides functions to collect and analyze data from NIH reporter, 
+    pubmed, github, NIH ICITE, 
+    Google Analytics, and other sources. It also includes functions to visualize and 
+    report on the data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -12,14 +18,22 @@ Imports:
     googleAnalyticsR,
     dplyr,
     rlang,
-    utils
-Suggests: 
+    utils,
+    httr2,
+    purrr,
+    jsonlite,
+    stringr,
+    tibble
+Suggests:
+    gargle,
     knitr,
     quarto,
     lubridate,
-    zoo,
     ggplot2,
     DT,
-    shiny
+    shiny,
+    testthat (>= 3.0.0),
+    zoo
 VignetteBuilder: quarto
 URL: https://seandavi.github.io/programets/
+Config/testthat/edition: 3
