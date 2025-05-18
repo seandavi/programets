@@ -91,22 +91,22 @@ library(zoo)
 library(dplyr)
 
 # Group by user type and country, then calculate rolling average
-moving_avg_data <- daily_user_country_data %>%
-    arrange(date) %>%
-    group_by(newVsReturning, country) %>%
+moving_avg_data <- daily_user_country_data |>
+    arrange(date) |>
+    group_by(newVsReturning, country) |>
     mutate(
         activeUsers_7day_avg = rollmean(activeUsers, k = 7, fill = NA, align = "right"),
         sessions_7day_avg = rollmean(sessions, k = 7, fill = NA, align = "right")
-    ) %>%
+    ) |>
     ungroup()
 
 # Let's see the results
 head(moving_avg_data)
 
 # Plot the moving average for active users
-moving_avg_data %>%
-    group_by(date, newVsReturning) %>%
-    summarise(activeUsers_7day_avg = sum(activeUsers_7day_avg, na.rm = TRUE)) %>%
+moving_avg_data |>
+    group_by(date, newVsReturning) |>
+    summarise(activeUsers_7day_avg = sum(activeUsers_7day_avg, na.rm = TRUE)) |>
     ggplot(aes(x = date, y = activeUsers_7day_avg, color = newVsReturning)) +
     geom_line() +
     labs(

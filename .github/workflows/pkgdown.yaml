@@ -30,12 +30,6 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-      
-      - name: Install Quarto (v1.7.30)
-        run: |
-          QUARTO_VERSION=1.7.30
-          curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb
-          sudo dpkg -i quarto-${QUARTO_VERSION}-linux-amd64.deb
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
