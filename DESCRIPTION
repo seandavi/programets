@@ -13,7 +13,9 @@ Imports:
     dplyr,
     rlang,
     utils,
-    purrr
+    purrr,
+    httr2,
+    tibble
 Suggests: 
     knitr,
     quarto,

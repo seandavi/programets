@@ -5,6 +5,8 @@
 #'   will run without authentication.
 #' @param limit The maximum number of results to return. Defaults to 30.
 #' 
+#' @importFrom httr2 request req_url_query req_perform resp_status resp_body_json req_auth_bearer_token
+#' @importFrom tibble tibble
 #' @importFrom purrr map_chr map_dbl
 #'
 #' @return A data frame containing the results of the search query.

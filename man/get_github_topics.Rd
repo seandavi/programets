@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_github_topics.R
 \name{get_github_topics}
 \alias{get_github_topics}
-\title{Get Repositories from GitHub by Topic}
+\title{Get GitHub Repositories by Topic}
 \usage{
 get_github_topics(topics, token = NULL, limit = 30)
 }
@@ -18,5 +18,5 @@ will run without authentication.}
 A data frame containing the results of the search query.
 }
 \description{
-Get Repositories from GitHub by Topic
+Get GitHub Repositories by Topic
 }
