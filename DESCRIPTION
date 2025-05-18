@@ -12,7 +12,8 @@ Imports:
     googleAnalyticsR,
     dplyr,
     rlang,
-    utils
+    utils,
+    purrr
 Suggests: 
     knitr,
     quarto,
