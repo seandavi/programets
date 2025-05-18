@@ -11,6 +11,12 @@
 #'
 #' @return A data frame containing the results of the search query.
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' topics <- c("u54od036472")
+#' get_github_topics(topics)
+#' }
 
 get_github_topics <- function(topics, token = NULL, limit = 30) {
   if (length(topics) == 0) {

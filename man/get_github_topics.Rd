@@ -20,3 +20,9 @@ A data frame containing the results of the search query.
 \description{
 Get GitHub Repositories by Topic
 }
+\examples{
+\dontrun{
+topics <- c("u54od036472")
+get_github_topics(topics)
+}
+}
