@@ -19,7 +19,7 @@
 #' get_github_topics(topics)
 #' }
 
-get_github_topics <- function(topics, token = NULL, limit = 30) {
+get_github_by_topic <- function(topics, token = NULL, limit = 30) {
   if (length(topics) == 0) {
     stop("At least one topic must be provided.")
   }

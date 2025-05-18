@@ -3,7 +3,7 @@
 export(ga_dataframe)
 export(ga_meta_simple)
 export(ga_query_explorer)
-export(get_github_topics)
+export(get_github_by_topic)
 export(get_publications_for_core_projects)
 export(icite)
 import(dplyr)
