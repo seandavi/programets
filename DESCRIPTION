@@ -19,8 +19,8 @@ Imports:
     dplyr,
     rlang,
     utils,
-    httr2,
     purrr,
+    httr2,
     jsonlite,
     stringr,
     tibble
