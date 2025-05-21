@@ -21,8 +21,9 @@ A data frame containing the results of the search query.
 Get GitHub Repositories by Topic
 }
 \examples{
-\dontrun{
-topics <- c("u54od036472")
-get_github_topics(topics)
-}
+topics <- c("u24ca289073")
+df = get_github_by_topic(topics, limit = 50)
+head(df)
+dplyr::glimpse(df)
+
 }

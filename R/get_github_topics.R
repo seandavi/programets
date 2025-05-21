@@ -11,13 +11,14 @@
 #' @importFrom rlang %||%
 #'
 #' @return A data frame containing the results of the search query.
-#' @export
 #'
 #' @examples
-#' \dontrun{
-#' topics <- c("u54od036472")
-#' get_github_topics(topics)
-#' }
+#' topics <- c("u24ca289073")
+#' df = get_github_by_topic(topics, limit = 50)
+#' head(df)
+#' dplyr::glimpse(df)
+#' 
+#' @export
 
 get_github_by_topic <- function(topics, token = NULL, limit = 30) {
   if (length(topics) == 0) {
