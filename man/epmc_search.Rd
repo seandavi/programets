@@ -4,7 +4,7 @@
 \alias{epmc_search}
 \title{Search Europe PMC for publications}
 \usage{
-epmc_search(query, page_limit = 10)
+epmc_search(query, page_limit = 10, delay = 1)
 }
 \arguments{
 \item{query}{A character string representing the search query for Europe PMC.
@@ -12,6 +12,8 @@ See \url{https://europepmc.org/Help} for query syntax.}
 
 \item{page_limit}{An integer specifying the maximum number of pages to retrieve.
 Defaults to 10. Set to \code{Inf} to retrieve all pages (use with caution).}
+
+\item{delay}{An integer delay for API calls. Defaults to 1.}
 }
 \value{
 A tibble where each row represents a publication. Columns include:

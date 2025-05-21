@@ -8,6 +8,7 @@
 #'   See \url{https://europepmc.org/Help} for query syntax.
 #' @param page_limit An integer specifying the maximum number of pages to retrieve.
 #'   Defaults to 10. Set to `Inf` to retrieve all pages (use with caution).
+#' @param delay An integer delay for API calls. Defaults to 1.
 #' 
 #' @return A tibble where each row represents a publication. Columns include:
 #'   \describe{
@@ -56,7 +57,7 @@
 #'   dplyr::glimpse(author_results)
 #' }
 #' @export
-epmc_search <- function(query, page_limit = 10) {
+epmc_search <- function(query, page_limit = 10, delay = 1) {
   if (!is.character(query) || length(query) != 1 || nchar(trimws(query)) == 0) {
     rlang::abort("`query` must be a non-empty character string.")
   }
