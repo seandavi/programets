@@ -42,7 +42,6 @@
 #' 
 #' @importFrom httr2 request req_url_query req_retry req_perform req_error resp_body_json resp_status
 #' @importFrom dplyr as_tibble bind_rows
-#' @importFrom purrr map_dfr
 #' @importFrom rlang abort inform
 #' @importFrom jsonlite fromJSON
 #' 
@@ -170,7 +169,7 @@ epmc_search <- function(query, page_limit = 10, delay = 1) {
   }
   
   # Combine all pages into a single tibble
-  # Use purrr::map_dfr for robust row-binding, handling potential missing columns
+  # Use dplyr::bind_rows for row-binding, handling potential missing columns
   # by filling with NA.
   # First, ensure all dataframes have the same columns as the first one, adding missing ones with NA
   
