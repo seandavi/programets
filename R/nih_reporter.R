@@ -1,7 +1,7 @@
-#' Get Publications for Core Projects
+#' Get Core Project Info
 #'
-#' This function retrieves a list of publications associated with a set of core
-#' project numbers from the NIH RePORTER API.
+#' Given NIH Core Project Number(s), this function retrieves project metadata 
+#' including any assosciated publications from the NIH RePORTER API.
 #'
 #' @param core_project_numbers A character vector of core project numbers.
 #'
@@ -23,10 +23,10 @@
 #' @export
 #' @examples
 #' # Get publications for a set of core project numbers
-#' publications <- get_publications_for_core_projects(c("u54od036472", "99999999"))
+#' proj_info <- get_core_project_info(c("u54od036472", "99999999"))
 #' # View the results
-#' publications
-get_publications_for_core_projects <- function(core_project_numbers) {
+#' proj_info
+get_core_project_info <- function(core_project_numbers) {
   # Validate input
   if (!is.character(core_project_numbers)) {
     stop("Input must be a character vector")
@@ -66,7 +66,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
     purrr::map_dfr(resp$results, function(pub) {
       dplyr::tibble(
         core_project_number = pub$coreproject,
-        found = TRUE,
+        found_publication = TRUE,
         applid = as.character(pub$applid),
         pmid = as.character(pub$pmid),
         pubmed_url = paste0("https://pubmed.ncbi.nlm.nih.gov/", pub$pmid)
@@ -80,7 +80,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
       results_tbl,
       tibble(core_project_number = setdiff(core_project_numbers, results_tbl$core_project_number)) |>
       mutate(
-        found = FALSE,
+        found_publication = FALSE,
         applid = NA_character_,
         pmid = NA_character_,
         pubmed_url = NA_character_
@@ -155,7 +155,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
     proj_results_tbl %>% 
     full_join(all_results, by = c('core_project_num' = 'core_project_number', 'appl_id' = 'applid')) %>% 
     relocate(core_project_num, .before = appl_id) %>% 
-    relocate(found, .after = core_project_num)
+    relocate(found_publication, .after = core_project_num)
 
   return(all_results_combined)
 }
