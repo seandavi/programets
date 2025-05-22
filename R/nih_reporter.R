@@ -104,7 +104,7 @@ get_publications_for_core_projects <- function(core_project_numbers) {
   proj_results_tbl <- 
     purrr::map_dfr(resp_proj$results, function(proj_info) {
       dplyr::tibble(
-        applid = as.integer(proj_info$appl_id),
+        appl_id = as.character(proj_info$appl_id),
         core_project_num = as.character(proj_info$core_project_num),
         subproject_id = as.character(proj_info$subproject_id),
         fiscal_year = as.integer(proj_info$fiscal_year),
@@ -151,8 +151,13 @@ get_publications_for_core_projects <- function(core_project_numbers) {
       )
     }
   )
-  
-  return(all_results)
+  all_results_combined <- 
+    proj_results_tbl %>% 
+    full_join(all_results, by = c('core_project_num' = 'core_project_number', 'appl_id' = 'applid')) %>% 
+    relocate(core_project_num, .before = appl_id) %>% 
+    relocate(found, .after = core_project_num)
+
+  return(all_results_combined)
 }
 
 
