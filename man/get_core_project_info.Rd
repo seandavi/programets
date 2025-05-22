@@ -13,8 +13,8 @@ get_core_project_info(core_project_numbers)
 A tibble with the following columns:
 \describe{
 \item{core_project_number}{The core project number.}
-\item{found}{A logical indicating whether any publications were found for this core project number.}
-\item{applid}{The application ID associated with the publication.}
+\item{found_publication}{A logical indicating whether any publications were found for this core project number.}
+\item{appl_id}{The application ID associated with the publication.}
 \item{pmid}{The PubMed ID associated with the publication.}
 \item{pubmed_url}{The URL of the PubMed page for the publication.}
 }

@@ -5,7 +5,7 @@
 #'
 #' @param core_project_numbers A character vector of core project numbers.
 #'
-#' @importFrom dplyr arrange bind_rows mutate tibble
+#' @importFrom dplyr arrange bind_rows full_join mutate relocate tibble
 #' @importFrom purrr map_dfr
 #' @importFrom httr2 req_body_json req_headers req_method req_perform resp_body_json request
 #' @importFrom rlang .data abort inform format_error_bullets
@@ -14,8 +14,8 @@
 #' @return A tibble with the following columns:
 #' \describe{
 #'   \item{core_project_number}{The core project number.}
-#'   \item{found}{A logical indicating whether any publications were found for this core project number.}
-#'   \item{applid}{The application ID associated with the publication.}
+#'   \item{found_publication}{A logical indicating whether any publications were found for this core project number.}
+#'   \item{appl_id}{The application ID associated with the publication.}
 #'   \item{pmid}{The PubMed ID associated with the publication.}
 #'   \item{pubmed_url}{The URL of the PubMed page for the publication.}
 #' }
@@ -97,8 +97,8 @@ get_core_project_info <- function(core_project_numbers) {
       criteria = list(project_nums = core_project_numbers)
     )
   ) 
-  resp_proj <- req_proj %>% 
-    req_perform() %>% 
+  resp_proj <- req_proj |> 
+    req_perform() |> 
     resp_body_json()
 
   proj_results_tbl <- 
@@ -152,10 +152,10 @@ get_core_project_info <- function(core_project_numbers) {
     }
   )
   all_results_combined <- 
-    proj_results_tbl %>% 
-    full_join(all_results, by = c('core_project_num' = 'core_project_number', 'appl_id' = 'applid')) %>% 
-    relocate(core_project_num, .before = appl_id) %>% 
-    relocate(found_publication, .after = core_project_num)
+    proj_results_tbl |> 
+    full_join(all_results, by = c('core_project_num' = 'core_project_number', 'appl_id' = 'applid')) |> 
+    relocate(.data$core_project_num, .before = .data$appl_id) |> 
+    relocate(.data$found_publication, .after = .data$core_project_num)
 
   return(all_results_combined)
 }
