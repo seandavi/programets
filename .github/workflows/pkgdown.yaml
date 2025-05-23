@@ -20,6 +20,7 @@ jobs:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GARGLE_ENCRYPTION_KEY: ${{ secrets.GARGLE_ENCRYPTION_KEY }}
     permissions:
       contents: write
     steps:
