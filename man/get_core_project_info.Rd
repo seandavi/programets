@@ -10,13 +10,55 @@ get_core_project_info(core_project_numbers)
 \item{core_project_numbers}{A character vector of core project numbers.}
 }
 \value{
-A tibble with the following columns:
+A tibble containing the following columns:
 \describe{
-\item{core_project_number}{The core project number.}
+\item{core_project_num}{The core project number.}
 \item{found_publication}{A logical indicating whether any publications were found for this core project number.}
 \item{appl_id}{The application ID associated with the publication.}
 \item{pmid}{The PubMed ID associated with the publication.}
 \item{pubmed_url}{The URL of the PubMed page for the publication.}
+\item{subproject_id}{The subproject ID associated with the publication.}
+\item{fiscal_year}{The fiscal year associated with the publication.}
+\item{project_num}{The project number associated with the publication.}
+\item{project_serial_num}{The project serial number associated with the publication.}
+\item{organization}{The organization associated with the publication.}
+\item{award_type}{The award type associated with the publication.}
+\item{activity_code}{The activity code associated with the publication.}
+\item{is_active}{A logical indicating whether the project is active.}
+\item{project_num_split}{The project number split associated with the publication.}
+\item{principal_investigators}{The principal investigators associated with the publication.}
+\item{contact_pi_name}{The contact PI name associated with the publication.}
+\item{program_officers}{The program officers associated with the publication.}
+\item{agency_ic_admin}{The agency IC admin associated with the publication.}
+\item{agency_ic_fundings}{The agency IC fundings associated with the publication.}
+\item{cong_dist}{The congressional district associated with the publication.}
+\item{spending_categories}{The spending categories associated with the publication.}
+\item{project_start_date}{The project start date associated with the publication.}
+\item{project_end_date}{The project end date associated with the publication.}
+\item{organization_type}{The organization type associated with the publication.}
+\item{geo_lat_lon}{The geographic latitude and longitude associated with the publication.}
+\item{opportunity_number}{The opportunity number associated with the publication.}
+\item{full_study_section}{The full study section associated with the publication.}
+\item{award_notice_date}{The award notice date associated with the publication.}
+\item{is_new}{A logical indicating whether the project is new.}
+\item{mechanism_code_dc}{The mechanism code DC associated with the publication.}
+\item{terms}{The terms associated with the publication.}
+\item{pref_terms}{The preferred terms associated with the publication.}
+\item{abstract_text}{The abstract text associated with the publication.}
+\item{project_title}{The project title associated with the publication.}
+\item{phr_text}{The PHR text associated with the publication.}
+\item{spending_categories_desc}{The spending categories description associated with the publication.}
+\item{agency_code}{The agency code associated with the publication.}
+\item{covid_response}{The COVID response associated with the publication.}
+\item{arra_funded}{The ARRA funded associated with the publication.}
+\item{budget_start}{The budget start associated with the publication.}
+\item{budget_end}{The budget end associated with the publication.}
+\item{cfda_code}{The CFDA code associated with the publication.}
+\item{funding_mechanism}{The funding mechanism associated with the publication.}
+\item{direct_cost_amt}{The direct cost amount associated with the publication.}
+\item{indirect_cost_amt}{The indirect cost amount associated with the publication.}
+\item{project_detail_url}{The project detail URL associated with the publication.}
+\item{date_added}{The date added associated with the publication.}
 }
 }
 \description{
