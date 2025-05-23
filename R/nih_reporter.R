@@ -139,9 +139,23 @@ get_core_project_info <- function(core_project_numbers) {
       criteria = list(project_nums = core_project_numbers)
     )
   ) 
-  resp_proj <- req_proj |> 
-    req_perform() |> 
-    resp_body_json()
+  
+  # Attempt to perform req, with error handling
+  resp_proj <- tryCatch(
+    {
+      req_proj |> 
+        req_perform() |> 
+        resp_body_json()
+    },
+    error = function(e){
+      if(str_detect(as.character(e), pattern = regex('HTTP 400', ignore_case = T)) ) {
+        inform(format_error_bullets(c('!' = conditionMessage(e))))
+        abort('Please verify at least one of the core projects has been entered correctly and exists.', class = 'api_400')
+      } else {
+        abort(conditionMessage(e), class = 'api_general')
+      }
+    }
+  )
 
   proj_results_tbl <- 
     purrr::map_dfr(resp_proj$results, function(proj_info) {
