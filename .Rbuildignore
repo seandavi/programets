@@ -6,5 +6,6 @@
 ^pkgdown$
 ^.lintr$
 .vscode/
+^\.github$
 terraform/
 DEVELOPER.md

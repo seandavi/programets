@@ -1,6 +1,7 @@
-url: ~
+url: https://seandavi.github.io/programets/
 template:
   bootstrap: 5
   bslib:
     bootswatch: materia
     pkgdown-nav-height: 100px
+

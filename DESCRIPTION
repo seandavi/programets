@@ -35,4 +35,5 @@ Suggests:
     testthat (>= 3.0.0),
     zoo
 VignetteBuilder: quarto
+URL: https://seandavi.github.io/programets/
 Config/testthat/edition: 3

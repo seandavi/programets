@@ -21,19 +21,21 @@ The package provides functions to authenticate with your Google account, retriev
 
 # Getting started with `googleAnalyticsR`
 
-
 ```{r}
-## setup
+#| label: setup
 library(googleAnalyticsR)
 library(programets)
 ```
 
-```{r eval=FALSE}
-## authenticate
+```{r}
+#| eval: false
+#| label: authenticate
 ga_auth(email = "seandavi@gmail.com")
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
+#| label: service_account
   json_file <- gargle::secret_decrypt_json(
     path = system.file(
       "secret",
@@ -49,25 +51,21 @@ ga_auth(email = "seandavi@gmail.com")
 ```
 
 ```{r}
-## get your accounts
+#| label: get-accounts
 account_list <- ga_account_list("ga4")
 
-## account_list will have a column called "viewId"
-account_list$viewId
+## account_list will have a column called "propertyId"
+account_list$propertyId
 
 ## View account_list and pick the one that you want to use
 ## In this case, we will use Bioconductor
 ga_id <- 388188354
-
 ```
 
 The resulting `res` object will contain the data for the specified date range, metrics, and dimensions. You can view the first few rows of the data using the `head()` function. 
 
-
-
-
 ```{r}
-library(googleAnalyticsR)
+#| label: get-data
 library(lubridate)
 
 start_date <- Sys.Date() - 365
@@ -85,28 +83,27 @@ daily_user_country_data <- ga_data(
 
 ```{r}
 #| label: moving-average
-
 library(ggplot2)
 library(zoo)
 library(dplyr)
 
 # Group by user type and country, then calculate rolling average
-moving_avg_data <- daily_user_country_data %>%
-    arrange(date) %>%
-    group_by(newVsReturning, country) %>%
+moving_avg_data <- daily_user_country_data |>
+    arrange(date) |>
+    group_by(newVsReturning, country) |>
     mutate(
         activeUsers_7day_avg = rollmean(activeUsers, k = 7, fill = NA, align = "right"),
         sessions_7day_avg = rollmean(sessions, k = 7, fill = NA, align = "right")
-    ) %>%
+    ) |>
     ungroup()
 
 # Let's see the results
 head(moving_avg_data)
 
 # Plot the moving average for active users
-moving_avg_data %>%
-    group_by(date, newVsReturning) %>%
-    summarise(activeUsers_7day_avg = sum(activeUsers_7day_avg, na.rm = TRUE)) %>%
+moving_avg_data |>
+    group_by(date, newVsReturning) |>
+    summarise(activeUsers_7day_avg = sum(activeUsers_7day_avg, na.rm = TRUE)) |>
     ggplot(aes(x = date, y = activeUsers_7day_avg, color = newVsReturning)) +
     geom_line() +
     labs(
